@@ -3,8 +3,8 @@ step "Calculate Deployment Mode" {
     action {
         notes = <<-EOT
                 **Always Runs**
-                
                 Step to determine if we are deploying, redeploying, or rolling back.
+                Should this code be in the main branch or no? 
             EOT
         properties = {
             Octopus.Action.RunOnServer = "true"
