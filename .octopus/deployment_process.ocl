@@ -5,6 +5,8 @@ step "Calculate Deployment Mode" {
                 **Always Runs**
                 
                 Step to determine if we are deploying, redeploying, or rolling back.
+                
+                Notes from Billy Ripple demo - 06.09.22
             EOT
         properties = {
             Octopus.Action.RunOnServer = "true"
