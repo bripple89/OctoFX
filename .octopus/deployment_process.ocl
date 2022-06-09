@@ -1,6 +1,7 @@
 step "Calculate Deployment Mode" {
 
     action {
+        channels = ["Feature Channel"]
         notes = <<-EOT
                 **Always Runs**
                 
@@ -131,6 +132,31 @@ step "Verify Application" {
             Octopus.Action.Manual.Instructions = "Please log on to www.#{Application.Website.Name}.com and verify the application is running correctly."
             Octopus.Action.Manual.ResponsibleTeamIds = "Everyone"
         }
+    }
+}
+
+step "Slack - Detailed Notification" {
+
+    action {
+        channels = ["Feature Channel"]
+        properties = {
+            DeploymentInfoText = "#{Octopus.Project.Name} release #{Octopus.Release.Number} to #{Octopus.Environment.Name} (#{Octopus.Machine.Name})"
+            IconUrl = "https://octopus.com/content/resources/favicon.png"
+            IncludeErrorMessageOnFailure = "True"
+            IncludeFieldEnvironment = "false"
+            IncludeFieldMachine = "false"
+            IncludeFieldRelease = "false"
+            IncludeFieldReleaseNotes = "false"
+            IncludeFieldTenant = "false"
+            IncludeFieldUsername = "True"
+            IncludeLinkOnFailure = "True"
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Template.Id = "ActionTemplates-103"
+            Octopus.Action.Template.Version = "8"
+            OctopusBaseUrl = "https://csinterviews.octopus.app/"
+            Username = "Octopus Deploy"
+        }
+        worker_pool = "Hosted Windows"
     }
 }
 
